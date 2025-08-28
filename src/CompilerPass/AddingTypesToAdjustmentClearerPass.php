@@ -35,7 +35,9 @@ final class AddingTypesToAdjustmentClearerPass implements CompilerPassInterface
 
     private function addClearerToContainerParameter(ContainerBuilder $container, string $parameterName): void
     {
-        assert(1 === preg_match('/^%(.*)%$/', $parameterName, $matches));
+        if (1 !== preg_match('/^%(.*)%$/', $parameterName, $matches)) {
+            throw new \RuntimeException(sprintf('Could not match placeholders in parameter name %s', $parameterName));
+        }
         $parameterName = $matches[1];
         $listOfAdjustmentsToClear = $container->getParameter($parameterName);
         $listOfAdjustmentsToClear[] = CustomerOptionRecalculator::CUSTOMER_OPTION_ADJUSTMENT;
