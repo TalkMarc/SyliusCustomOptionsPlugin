@@ -30,6 +30,10 @@ class OrderItemOptionFactoryTest extends TestCase
 
     private \Sylius\Component\Core\Model\ChannelInterface $channel;
 
+    private \Sylius\Component\Core\Model\OrderInterface $cart;
+
+    private \Sylius\Component\Order\Context\CartContextInterface $cartContext;
+
     public function setUp(): void
     {
         $baseFactory = self::createMock(FactoryInterface::class);
@@ -65,7 +69,17 @@ class OrderItemOptionFactoryTest extends TestCase
         $customerOptionValuePriceRepository = self::createMock(CustomerOptionValuePriceRepositoryInterface::class);
         $customerOptionValuePriceRepository->method('getPriceForChannel')->willReturn($customerOptionValuePrice);
 
-        $this->orderItemOptionFactory = new OrderItemOptionFactory($baseFactory, $customerOptionRepo, $valueResolver, $customerOptionValuePriceRepository);
+        $this->cart = self::createMock(OrderInterface::class);
+        $this->cartContext = self::createMock(\Sylius\Component\Order\Context\CartContextInterface::class);
+        $this->cartContext->method('getCart')->willReturnCallback(fn() => $this->cart);
+
+        $this->orderItemOptionFactory = new OrderItemOptionFactory(
+            $baseFactory,
+            $customerOptionRepo,
+            $valueResolver,
+            $customerOptionValuePriceRepository,
+            $this->cartContext
+        );
     }
 
     private function addCustomerOption(CustomerOptionInterface $customerOption)
