@@ -25,6 +25,7 @@ use Exception;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 class OrderItemOptionFactory implements OrderItemOptionFactoryInterface, FactoryInterface
@@ -34,6 +35,7 @@ class OrderItemOptionFactory implements OrderItemOptionFactoryInterface, Factory
         private CustomerOptionRepositoryInterface $customerOptionRepository,
         private CustomerOptionValueResolverInterface $valueResolver,
         private CustomerOptionValuePriceRepositoryInterface $customerOptionValuePriceRepository,
+        private CartContextInterface $cartContext,
     )
     {
     }
@@ -58,7 +60,7 @@ class OrderItemOptionFactory implements OrderItemOptionFactoryInterface, Factory
 
         if ($customerOptionValue instanceof CustomerOptionValueInterface) {
             /** @var OrderInterface $order */
-            $order = $orderItem->getOrder();
+            $order = $orderItem->getOrder() ?? $this->cartContext->getCart();
 
             /** @var ProductInterface $product */
             $product = $orderItem->getProduct();
