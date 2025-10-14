@@ -30,6 +30,10 @@ class OrderItemOptionFactoryTest extends TestCase
 
     private \Sylius\Component\Core\Model\ChannelInterface $channel;
 
+    private \Sylius\Component\Core\Model\OrderInterface $cart;
+
+    private \Sylius\Component\Order\Context\CartContextInterface $cartContext;
+
     public function setUp(): void
     {
         $baseFactory = self::createMock(FactoryInterface::class);
@@ -65,7 +69,17 @@ class OrderItemOptionFactoryTest extends TestCase
         $customerOptionValuePriceRepository = self::createMock(CustomerOptionValuePriceRepositoryInterface::class);
         $customerOptionValuePriceRepository->method('getPriceForChannel')->willReturn($customerOptionValuePrice);
 
-        $this->orderItemOptionFactory = new OrderItemOptionFactory($baseFactory, $customerOptionRepo, $valueResolver, $customerOptionValuePriceRepository);
+        $this->cart = self::createMock(OrderInterface::class);
+        $this->cartContext = self::createMock(\Sylius\Component\Order\Context\CartContextInterface::class);
+        $this->cartContext->method('getCart')->willReturnCallback(fn() => $this->cart);
+
+        $this->orderItemOptionFactory = new OrderItemOptionFactory(
+            $baseFactory,
+            $customerOptionRepo,
+            $valueResolver,
+            $customerOptionValuePriceRepository,
+            $this->cartContext
+        );
     }
 
     private function addCustomerOption(CustomerOptionInterface $customerOption)
@@ -132,6 +146,30 @@ class OrderItemOptionFactoryTest extends TestCase
         $product = self::createMock(ProductInterface::class);
         $order = self::createConfiguredMock(OrderInterface::class, ['getChannel' => $this->channel]);
         $orderItem = self::createConfiguredMock(OrderItemInterface::class, ['getOrder' => $order, 'getProduct' => $product]);
+
+        $this->addCustomerOption($customerOption);
+
+        $orderItemOption = $this->orderItemOptionFactory->createNewFromStrings($orderItem, 'something', 'value');
+
+        self::assertEquals($customerOptionValue, $orderItemOption->getCustomerOptionValue());
+        self::assertEquals($customerOptionValue->getCode(), $orderItemOption->getCustomerOptionValueCode());
+    }
+
+    public function testCreateNewFromStringWithValidValueWithoutOrder()
+    {
+        $customerOptionValuePrice = self::createMock(CustomerOptionValuePriceInterface::class);
+
+        $customerOptionValue = self::createMock(CustomerOptionValueInterface::class);
+        $customerOptionValue->method('getCode')->willReturn('value');
+        $customerOptionValue->method('getName')->willReturn('some value');
+        $customerOptionValue->method('getPriceForChannel')->with($this->channel)->willReturn($customerOptionValuePrice);
+
+        $customerOption = $this->createCustomerOption('something');
+        $customerOption->method('getValues')->willReturn(new ArrayCollection([$customerOptionValue]));
+
+        $product = self::createMock(ProductInterface::class);
+        $this->cart->method('getChannel')->willReturn($this->channel);
+        $orderItem = self::createConfiguredMock(OrderItemInterface::class, ['getOrder' => null, 'getProduct' => $product]);
 
         $this->addCustomerOption($customerOption);
 
