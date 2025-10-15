@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
+>
+    <class name="Brille24\SyliusCustomerOptionsPlugin\Entity\CustomerOptions\CustomerOptionValuePrice">
+        <attribute name="id">
+            <group>admin:customer_option_value_price:read</group>
+            <group>shop:customer_option_value_price:read</group>
+            <group>shop:customer_option_value:read</group>
+            <group>shop:product:show</group>
+        </attribute>
+        <attribute name="type">
+            <group>admin:customer_option_value_price:read</group>
+            <group>shop:customer_option_value_price:read</group>
+            <group>shop:customer_option_value:read</group>
+            <group>shop:product:show</group>
+        </attribute>
+        <attribute name="amount">
+            <group>admin:customer_option_value_price:read</group>
+            <group>shop:customer_option_value_price:read</group>
+            <group>shop:customer_option_value:read</group>
+            <group>shop:product:show</group>
+        </attribute>
+        <attribute name="percent">
+            <group>admin:customer_option_value_price:read</group>
+            <group>shop:customer_option_value_price:read</group>
+            <group>shop:customer_option_value:read</group>
+            <group>shop:product:show</group>
+        </attribute>
+        <attribute name="channel">
+            <group>admin:customer_option_value_price:read</group>
+        </attribute>
+        <attribute name="product">
+            <group>admin:customer_option_value_price:read</group>
+        </attribute>
+        <attribute name="dateValid">
+            <group>admin:customer_option_value_price:read</group>
+        </attribute>
+    </class>
+</serializer>

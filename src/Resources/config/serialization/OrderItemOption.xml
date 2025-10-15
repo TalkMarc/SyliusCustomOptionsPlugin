@@ -1,0 +1,118 @@
+<?xml version="1.0" ?>
+<serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
+>
+    <class name="Brille24\SyliusCustomerOptionsPlugin\Entity\OrderItemOption">
+        <attribute name="id">
+            <group>admin:order_item_option:read</group>
+            <group>shop:order_item_option:read</group>
+            <group>shop:order_item:read</group>
+            <group>admin:order_item:read</group>
+            <group>admin:order:read</group>
+            <group>shop:order:read</group>
+            <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
+        </attribute>
+        <attribute name="customerOptionCode">
+            <group>admin:order_item_option:read</group>
+            <group>shop:order_item_option:read</group>
+            <group>shop:order_item:read</group>
+            <group>admin:order_item:read</group>
+            <group>admin:order:read</group>
+            <group>shop:order:read</group>
+            <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
+        </attribute>
+        <attribute name="customerOptionName">
+            <group>admin:order_item_option:read</group>
+            <group>shop:order_item_option:read</group>
+            <group>shop:order_item:read</group>
+            <group>admin:order_item:read</group>
+            <group>admin:order:read</group>
+            <group>shop:order:read</group>
+            <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
+        </attribute>
+        <attribute name="customerOptionType">
+            <group>admin:order_item_option:read</group>
+            <group>shop:order_item_option:read</group>
+            <group>shop:order_item:read</group>
+            <group>admin:order_item:read</group>
+            <group>admin:order:read</group>
+            <group>shop:order:read</group>
+            <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
+        </attribute>
+        <attribute name="customerOptionValueCode">
+            <group>admin:order_item_option:read</group>
+            <group>shop:order_item_option:read</group>
+            <group>shop:order_item:read</group>
+            <group>admin:order_item:read</group>
+            <group>admin:order:read</group>
+            <group>shop:order:read</group>
+            <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
+        </attribute>
+        <attribute name="customerOptionValueName">
+            <group>admin:order_item_option:read</group>
+            <group>shop:order_item_option:read</group>
+            <group>shop:order_item:read</group>
+            <group>admin:order_item:read</group>
+            <group>admin:order:read</group>
+            <group>shop:order:read</group>
+            <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
+        </attribute>
+        <attribute name="optionValue">
+            <group>admin:order_item_option:read</group>
+            <group>shop:order_item_option:read</group>
+            <group>shop:order_item:read</group>
+            <group>admin:order_item:read</group>
+            <group>admin:order:read</group>
+            <group>shop:order:read</group>
+            <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
+        </attribute>
+        <attribute name="fixedPrice">
+            <group>admin:order_item_option:read</group>
+            <group>shop:order_item_option:read</group>
+            <group>shop:order_item:read</group>
+            <group>admin:order_item:read</group>
+            <group>admin:order:read</group>
+            <group>shop:order:read</group>
+            <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
+        </attribute>
+        <attribute name="percent">
+            <group>admin:order_item_option:read</group>
+            <group>shop:order_item_option:read</group>
+            <group>shop:order_item:read</group>
+            <group>admin:order_item:read</group>
+            <group>admin:order:read</group>
+            <group>shop:order:read</group>
+            <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
+        </attribute>
+        <attribute name="pricingType">
+            <group>admin:order_item_option:read</group>
+            <group>shop:order_item_option:read</group>
+            <group>shop:order_item:read</group>
+            <group>admin:order_item:read</group>
+            <group>admin:order:read</group>
+            <group>shop:order:read</group>
+            <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
+        </attribute>
+        <attribute name="scalarValue" serialized-name="value">
+            <group>admin:order_item_option:read</group>
+            <group>shop:order_item_option:read</group>
+            <group>shop:order_item:read</group>
+            <group>admin:order_item:read</group>
+            <group>admin:order:read</group>
+            <group>shop:order:read</group>
+            <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
+        </attribute>
+    </class>
+</serializer>

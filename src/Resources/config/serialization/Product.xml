@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+<serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
+>
+    <class name="Sylius\Component\Core\Model\Product">
+        <!-- Customer Option Group -->
+        <attribute name="customerOptionGroup">
+            <group>admin:product:index</group>
+            <group>sylius:admin:product:index</group>
+            <group>admin:product:show</group>
+            <group>sylius:admin:product:show</group>
+            <group>shop:product:index</group>
+            <group>sylius:shop:product:index</group>
+            <group>shop:product:show</group>
+            <group>sylius:shop:product:show</group>
+        </attribute>
+
+        <!-- Customer Options (computed from group) -->
+        <attribute name="customerOptions">
+            <group>shop:product:index</group>
+            <group>sylius:shop:product:index</group>
+            <group>shop:product:show</group>
+            <group>sylius:shop:product:show</group>
+        </attribute>
+
+        <!-- Customer Option Value Prices (product-specific overrides) -->
+        <attribute name="customerOptionValuePrices">
+            <group>admin:product:show</group>
+            <group>sylius:admin:product:show</group>
+            <group>shop:product:show</group>
+            <group>sylius:shop:product:show</group>
+        </attribute>
+    </class>
+</serializer>

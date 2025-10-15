@@ -1,0 +1,100 @@
+<?xml version="1.0" ?>
+<serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
+>
+    <class name="Brille24\SyliusCustomerOptionsPlugin\Entity\CustomerOptions\Validator\Validator">
+        <attribute name="id">
+            <group>admin:validator:read</group>
+            <group>shop:validator:read</group>
+            <group>shop:customer_option_group:read</group>
+        </attribute>
+        <attribute name="conditions">
+            <group>admin:validator:read</group>
+            <group>shop:validator:read</group>
+            <group>shop:customer_option_group:read</group>
+        </attribute>
+        <attribute name="constraints">
+            <group>admin:validator:read</group>
+            <group>shop:validator:read</group>
+            <group>shop:customer_option_group:read</group>
+        </attribute>
+        <attribute name="errorMessage">
+            <group>admin:validator:read</group>
+            <group>shop:validator:read</group>
+            <group>shop:customer_option_group:read</group>
+        </attribute>
+    </class>
+
+    <class name="Brille24\SyliusCustomerOptionsPlugin\Entity\CustomerOptions\Validator\Condition">
+        <attribute name="id">
+            <group>admin:validator:read</group>
+            <group>shop:validator:read</group>
+            <group>shop:customer_option_group:read</group>
+        </attribute>
+        <attribute name="customerOption">
+            <group>admin:validator:read</group>
+            <group>shop:validator:read</group>
+            <group>shop:customer_option_group:read</group>
+        </attribute>
+        <attribute name="customerOptionValue">
+            <group>admin:validator:read</group>
+            <group>shop:validator:read</group>
+            <group>shop:customer_option_group:read</group>
+        </attribute>
+        <attribute name="comparator">
+            <group>admin:validator:read</group>
+            <group>shop:validator:read</group>
+            <group>shop:customer_option_group:read</group>
+        </attribute>
+        <attribute name="value">
+            <group>admin:validator:read</group>
+            <group>shop:validator:read</group>
+            <group>shop:customer_option_group:read</group>
+        </attribute>
+    </class>
+
+    <class name="Brille24\SyliusCustomerOptionsPlugin\Entity\CustomerOptions\Validator\Constraint">
+        <attribute name="id">
+            <group>admin:validator:read</group>
+            <group>shop:validator:read</group>
+            <group>shop:customer_option_group:read</group>
+        </attribute>
+        <attribute name="customerOption">
+            <group>admin:validator:read</group>
+            <group>shop:validator:read</group>
+            <group>shop:customer_option_group:read</group>
+        </attribute>
+        <attribute name="customerOptionValue">
+            <group>admin:validator:read</group>
+            <group>shop:validator:read</group>
+            <group>shop:customer_option_group:read</group>
+        </attribute>
+        <attribute name="comparator">
+            <group>admin:validator:read</group>
+            <group>shop:validator:read</group>
+            <group>shop:customer_option_group:read</group>
+        </attribute>
+        <attribute name="value">
+            <group>admin:validator:read</group>
+            <group>shop:validator:read</group>
+            <group>shop:customer_option_group:read</group>
+        </attribute>
+    </class>
+
+    <class name="Brille24\SyliusCustomerOptionsPlugin\Entity\CustomerOptions\Validator\ErrorMessage">
+        <attribute name="id">
+            <group>admin:validator:read</group>
+            <group>shop:validator:read</group>
+            <group>shop:customer_option_group:read</group>
+        </attribute>
+        <attribute name="message">
+            <group>admin:validator:read</group>
+            <group>shop:validator:read</group>
+            <group>shop:customer_option_group:read</group>
+        </attribute>
+        <attribute name="translations">
+            <group>admin:validator:read</group>
+        </attribute>
+    </class>
+</serializer>

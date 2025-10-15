@@ -19,7 +19,7 @@ use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
-final class Brille24SyliusCustomerOptionsExtension extends Extension
+final class Brille24SyliusCustomerOptionsExtension extends Extension implements PrependExtensionInterface
 {
     /**
      * @inheritdoc
@@ -32,6 +32,36 @@ final class Brille24SyliusCustomerOptionsExtension extends Extension
         $container->setParameter('brille24.sylius_customer_options.order_item_edit.recalculate_price', $config['order_item_edit']['recalculate_price']);
 
         new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config/app'));
+    }
+
+    public function prepend(ContainerBuilder $container): void
+    {
+        $this->prependSerializerMapping($container);
+        $this->prependApiPlatformMapping($container);
+    }
+
+    private function prependSerializerMapping(ContainerBuilder $container): void
+    {
+        $container->prependExtensionConfig('framework', [
+            'serializer' => [
+                'mapping' => [
+                    'paths' => [
+                        __DIR__ . '/../Resources/config/serialization',
+                    ],
+                ],
+            ],
+        ]);
+    }
+
+    private function prependApiPlatformMapping(ContainerBuilder $container): void
+    {
+        $container->prependExtensionConfig('api_platform', [
+            'mapping' => [
+                'paths' => [
+                    __DIR__ . '/../Resources/config/api_resources',
+                ],
+            ],
+        ]);
     }
 
     public function getConfiguration(array $config, ContainerBuilder $container): ConfigurationInterface

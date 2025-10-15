@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
+>
+    <class name="Brille24\SyliusCustomerOptionsPlugin\Entity\OrderItemInterface">
+        <!-- Customer Option Configuration -->
+        <attribute name="customerOptionConfiguration" serialized-name="customerOptionConfiguration">
+            <!-- Read groups -->
+            <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
+            <group>shop:order:read</group>
+            <group>sylius:shop:order:read</group>
+            <group>shop:order_item:read</group>
+            <group>sylius:shop:order_item:read</group>
+            <group>admin:order:read</group>
+            <group>sylius:admin:order:read</group>
+            <group>admin:order_item:read</group>
+            <group>sylius:admin:order_item:read</group>
+            <!-- Write groups -->
+            <group>shop:cart:add_item</group>
+            <group>sylius:shop:cart:add_item</group>
+            <group>shop:order_item:write</group>
+            <group>sylius:shop:order_item:write</group>
+            <group>admin:order_item:write</group>
+            <group>sylius:admin:order_item:write</group>
+        </attribute>
+    </class>
+</serializer>
