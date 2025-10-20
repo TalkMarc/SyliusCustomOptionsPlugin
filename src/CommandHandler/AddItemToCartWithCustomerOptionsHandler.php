@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Brille24\SyliusCustomerOptionsPlugin\CommandHandler;
 
+use ApiPlatform\Exception\InvalidArgumentException;
+use Brille24\SyliusCustomerOptionsPlugin\Entity\OrderItemOptionInterface;
+use Brille24\SyliusCustomerOptionsPlugin\Entity\ProductInterface;
 use Brille24\SyliusCustomerOptionsPlugin\Factory\OrderItemOptionFactoryInterface;
 use Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -40,6 +43,11 @@ final class AddItemToCartWithCustomerOptionsHandler implements MessageHandlerInt
 
         $salesOrderConfigurations = [];
 
+        // Validate that all submitted customer option codes belong to the product
+        /** @var ProductInterface $product */
+        $product = $cartItem->getProduct();
+        $this->validateCustomerOptionCodes($product, array_keys($addItemToCart->customerOptions));
+
         foreach ($addItemToCart->customerOptions as $customerOptionCode => $valueArray) {
             if (!is_array($valueArray)) {
                 $valueArray = [$valueArray];
@@ -60,6 +68,9 @@ final class AddItemToCartWithCustomerOptionsHandler implements MessageHandlerInt
                     $value,
                 );
 
+                // Validate that select/multi_select options have valid values
+                $this->validateOrderItemOption($salesOrderConfiguration);
+
                 $salesOrderConfigurations[] = $salesOrderConfiguration;
             }
         }
@@ -70,5 +81,39 @@ final class AddItemToCartWithCustomerOptionsHandler implements MessageHandlerInt
         $this->orderProcessor->process($cart);
 
         return $cart;
+    }
+
+    private function validateCustomerOptionCodes(ProductInterface $product, array $submittedCodes): void
+    {
+        $validCustomerOptions = $product->getCustomerOptions();
+        $validCodes = array_map(fn($option) => $option->getCode(), $validCustomerOptions);
+
+        foreach ($submittedCodes as $code) {
+            if (!in_array($code, $validCodes, true)) {
+                throw new InvalidArgumentException(
+                    sprintf(
+                        'Customer option "%s" is not available for this product.',
+                        $code
+                    )
+                );
+            }
+        }
+    }
+
+    private function validateOrderItemOption(OrderItemOptionInterface $orderItemOption): void
+    {
+        $customerOptionType = $orderItemOption->getCustomerOptionType();
+
+        // For select and multi_select options, the value must be a valid CustomerOptionValue
+        if (in_array($customerOptionType, ['select', 'multi_select'], true)) {
+            if ($orderItemOption->getCustomerOptionValue() === null) {
+                throw new InvalidArgumentException(
+                    sprintf(
+                        'Invalid value for customer option "%s". Please provide a valid option value code.',
+                        $orderItemOption->getCustomerOptionCode()
+                    )
+                );
+            }
+        }
     }
 }
