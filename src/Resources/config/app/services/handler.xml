@@ -15,5 +15,16 @@
             <argument type="service" id="security.token_storage" />
             <argument>brille24_failed_price_import_product_list</argument>
         </service>
+
+        <service id="Brille24\SyliusCustomerOptionsPlugin\CommandHandler\AddItemToCartWithCustomerOptionsHandler"
+                 decorates="Sylius\Bundle\ApiBundle\CommandHandler\Cart\AddItemToCartHandler"
+                 decoration-priority="10"
+        >
+            <argument type="service"
+                      id="Brille24\SyliusCustomerOptionsPlugin\CommandHandler\AddItemToCartWithCustomerOptionsHandler.inner"/>
+            <argument type="service" id="brille24.customer_options_plugin.factory.order_item_option_factory"/>
+            <argument type="service" id="sylius.order_processing.order_processor"/>
+            <tag name="messenger.message_handler"/>
+        </service>
     </services>
 </container>

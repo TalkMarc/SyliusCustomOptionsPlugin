@@ -1,0 +1,12 @@
+<container xmlns="http://symfony.com/schema/dic/services">
+    <services>
+        <service id="Brille24\SyliusCustomerOptionsPlugin\Serializer\AddItemToCartDenormalizer">
+            <tag name="serializer.normalizer" priority="64" />
+        </service>
+        <service id="Brille24\SyliusCustomerOptionsPlugin\Swagger\AddItemToCartOpenApiFactoryDecorator"
+                 decorates="api_platform.openapi.factory"
+        >
+            <argument type="service" id="Brille24\SyliusCustomerOptionsPlugin\Swagger\AddItemToCartOpenApiFactoryDecorator.inner" />
+        </service>
+    </services>
+</container>
